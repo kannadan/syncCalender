@@ -1,26 +1,23 @@
 import urllib
 import getpass
+import requests
 from http import cookiejar
 from bs4 import BeautifulSoup
 
-url = 'https://aapo.oulu.fi/web_aapo'
+url = 'https://aapo.oulu.fi/web_aapo/lukujarjestys'
 username = input("giv username: ")
 password = getpass.getpass("giv password: ")
 
-values = {'username' : username,
-          'password' : password }
+values = {'j_username' : username,
+            "_eventId_proceed" : "",
+          'j_password' : password }
 print(values)
 
-data = urllib.parse.urlencode(values)
-cookies = cookiejar.CookieJar()
-"""
-opener = urllib.request.build_opener(
-    urllib.request.HTTPRedirectHandler(),
-    urllib.request.HTTPHandler(debuglevel=0),
-    urllib.request.HTTPSHandler(debuglevel=0),
-    urllib.request.HTTPCookieProcessor(cookies))
+session = requests.session()
 
-response = opener.open(url, data)
-the_page = response.read()
-http_headers = response.info()
-"""
+response = session.get(url)
+cookies = session.cookies.get_dict()
+print (cookies)
+
+SAML_url = response.url
+response = session.post(SAML_url, payload)
