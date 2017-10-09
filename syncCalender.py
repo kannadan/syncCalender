@@ -2,22 +2,43 @@ import urllib
 import getpass
 import requests
 from http import cookiejar
+from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
+import json
 
-url = 'https://aapo.oulu.fi/web_aapo/lukujarjestys'
-username = input("giv username: ")
-password = getpass.getpass("giv password: ")
-
-values = {'j_username' : username,
+def login(addr):
+    username = input("giv username: ")
+    password = getpass.getpass("giv password: ")
+    ua = UserAgent()
+    session = requests.session()
+    response = session.get(addr)
+    cookies = session.cookies.get_dict()
+    print(cookies)
+    cookie = cookies["JSESSIONID"]
+    values = {'j_username' : username,
             "_eventId_proceed" : "",
           'j_password' : password }
-print(values)
 
-session = requests.session()
+    headers = {"Host" : "login.oulu.fi",
+                "User-Agent" : ua.random,
+                "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language" : "fi-FI,fi;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Accept-Encoding" : "gzip, deflate, br",
+                "Referer" : response.url,
+                "Content-Type" : "application/x-www-form-urlencoded",
+                "Content-Length" : "46",
+                "Cookie" : "JSESSIONID=" + cookie,
+                "Connection" : "keep-alive",
+                "Upgrade-Insecure-Requests" : "1"}
+    print(values)
 
-response = session.get(url)
-cookies = session.cookies.get_dict()
-print (cookies)
+    print (headers)
 
-SAML_url = response.url
-response = session.post(SAML_url, payload)
+    SAML_url = response.url
+    response = session.post(SAML_url, data=values, headers=headers)
+    #print(response.text)
+
+
+if __name__ == "__main__":
+    url = 'https://aapo.oulu.fi/web_aapo/lukujarjestys'
+    login(url)
