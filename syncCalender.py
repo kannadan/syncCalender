@@ -9,6 +9,7 @@ import json
 def login(addr):
     username = input("giv username: ")
     password = getpass.getpass("giv password: ")
+    posti = "https://aapo.oulu.fi/Shibboleth.sso/SAML2/POST"
     ua = UserAgent()
     session = requests.session()
     response = session.get(addr)
@@ -30,13 +31,23 @@ def login(addr):
                 "Cookie" : "JSESSIONID=" + cookie,
                 "Connection" : "keep-alive",
                 "Upgrade-Insecure-Requests" : "1"}
-    print(values)
 
-    print (headers)
+
 
     SAML_url = response.url
     response = session.post(SAML_url, data=values, headers=headers)
+    print(response.headers)
+    print("\n")
+    print(session.cookies.get_dict())
+    print("\n")
     #print(response.text)
+    soup = BeautifulSoup(response.text)
+    #print(soup.prettify())
+
+    payload = {"RelayState" : addr,
+                "SAMLResponse" : soup.find("input", {"name":"SAMLResponse"})["value"]}
+    resp2 = session.post(posti, data=payload, headers=session.headers )
+    print(resp2.text)
 
 
 if __name__ == "__main__":
