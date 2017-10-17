@@ -5,6 +5,8 @@ from http import cookiejar
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 import json
+import dryscrape
+import sys
 
 def login(addr):
     username = input("giv username: ")
@@ -14,7 +16,6 @@ def login(addr):
     session = requests.session()
     response = session.get(addr)
     cookies = session.cookies.get_dict()
-    print(cookies)
     cookie = cookies["JSESSIONID"]
     values = {'j_username' : username,
             "_eventId_proceed" : "",
@@ -36,7 +37,7 @@ def login(addr):
 
     SAML_url = response.url
     response = session.post(SAML_url, data=values, headers=headers)
-    print(response.headers)
+    #print(response.headers)
     print("\n")
     print(session.cookies.get_dict())
     print("\n")
@@ -47,7 +48,12 @@ def login(addr):
     payload = {"RelayState" : addr,
                 "SAMLResponse" : soup.find("input", {"name":"SAMLResponse"})["value"]}
     resp2 = session.post(posti, data=payload, headers=session.headers )
-    print(resp2.text)
+    #print(BeautifulSoup(resp2.text).prettify())
+    print(session.cookies.get_dict())
+    print(resp2.url)
+    lukkari = "https://aapo.oulu.fi/web_aapo/lukujarjestys/webaapo_prod/index.php"
+    resp3 = session.post(lukkari)
+    print(resp3.text)
 
 
 if __name__ == "__main__":
