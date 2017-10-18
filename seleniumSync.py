@@ -27,7 +27,7 @@ except ImportError:
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/calendar'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = 'client_secret.json'       #GET YOUR OWN FROM https://developers.google.com/google-apps/calendar/quickstart/python
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
 def get_credentials():
@@ -39,6 +39,7 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
+    #Didn't touch. works fine as is
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
@@ -63,7 +64,7 @@ def login(addr, username, password):
 
     #Login function for aapo.oulu.fi/web_aapo/lukujarjestys
     #Note that while the address is a parameter for the function, this will fail on any other address
-    display = Display(visible=1, size=(800, 600))
+    display = Display(visible=0, size=(800, 600))
     display.start()
 
     browser = webdriver.Firefox()
@@ -77,7 +78,7 @@ def login(addr, username, password):
     time.sleep(10)  #Generous wait time for browser to load everything
     return browser, display
 
-def makeCalender(driver):
+def makeCalender(driver, week):
     #Reads aapo calender and returns an events list
     now = datetime.now()    #gives us a year for the date object. Need to add check for end of the year!!!
     html = driver.page_source
@@ -87,30 +88,32 @@ def makeCalender(driver):
     days.extend(html.findAll("div",{"class":"rbc-day-slot rbc-time-column rbc-weekend"})) #weekend for some reason
     dates = html.find("div", {"class":"rbc-toolbar-label"}).getText()  #start date and month from calender
 
-    start, end = dates.split(",")[1].split("-") #get date from string: Viikko   43, 23.10. - 29.10.
+    start = dates.split(",")[1].split("-")[0] #get date from string: Viikko   43, 23.10. - 29.10.
     startD, startM = map(lambda x : int(x), start.strip().strip(".").split("."))
-    dateS = date(now.year, startM, startD)
+
+    if now.month == 1 and startM == 12: #handles days around new year
+        dateS = date(now.year-1, startM, startD)
+    else:
+        dateS = date(now.year, startM, startD)
 
     allEvents = []
 
-    for i in range(1): #sets how many weeks worth of data we collect
+    for i in range(week): #sets how many weeks worth of data we collect
         for pointer, day in enumerate(days):
-            paiva = (dateS + timedelta(pointer)).isoformat()
             events = day.findAll("div", {"class":"rbc-event"})
-            print(paiva)
             for event in events:
                 labelL = event.find("div", {"class":"rbc-event-label-left"}).getText() #time
                 labelR = event.find("div", {"class":"rbc-event-label-right"}).getText() #class room
                 content = event.find("div", {"class":"rbc-event-content"}).getText()    #course
 
                 start, end = labelL.split("-")
-                hourS, minS = map(lambda x : int(x), start.strip().split(":"))
+                hourS, minS = map(lambda x : int(x), start.strip().split(":"))  #turns start and endtimes to ints
                 hourE, minE = map(lambda x : int(x), end.strip().split(":"))
 
                 start = datetime.combine(dateS + timedelta(pointer), time2(hourS, minS))
                 end = datetime.combine(dateS + timedelta(pointer), time2(hourE, minE))
 
-                dict = {}
+                dict = {}   #ends as json for google api
                 dict["summary"] = content
                 dict["location"] = labelR
                 dict["start"] = {"dateTime" : start.strftime("%Y-%m-%dT%H:%M:%S"),
@@ -118,10 +121,11 @@ def makeCalender(driver):
                 dict["end"] = {"dateTime" : end.strftime("%Y-%m-%dT%H:%M:%S"),
                                     'timeZone': 'Europe/Helsinki'}
                 allEvents.append(dict)
-                """print("kello: " + labelL + " - Luokka: " + labelR)
-                print(content + "\n")"""
+                print("event found on " + start.strftime("%d.%m.%Y"))
+                print("kello: " + labelL + " - Luokka: " + labelR)
+                print(content + "\n")
 
-
+        print("Moving to next week")
         #print("Days found " + str(len(days)))
         button = driver.find_element_by_xpath("//button[contains(.,'Seuraava')]").click() #why does it have to be regexp
         time.sleep(10)  #again sleepy times to wait for page to load
@@ -143,20 +147,23 @@ def googlify(stuff):
 
     for event in stuff:
         event = service.events().insert(calendarId='primary', body=event).execute()
-        print ('Event created: %s' % (event.get('htmlLink')))
+        print ('Event created: \n%s\n' % (event.get('htmlLink')))
 
 if __name__ == "__main__":
     username = input("giv username: ")
     password = getpass.getpass("giv password: ")
+    weeks = input("give number of weeks you wanna read: ")
     url = 'https://aapo.oulu.fi/web_aapo/lukujarjestys'
-    browser, display = login(url, username, password)
-    if browser.title != "Aapo":
-        print("Wrong username or password")
+    if weeks.isdigit():
+        browser, display = login(url, username, password)
+        if browser.title != "Aapo":
+            print("Wrong username or password")
+        else:
+            events = makeCalender(browser, int(weeks))
+            browser.quit()
+            display.stop()
+            print("Done with aapo, moving to google")
+            googlify(events)
+            print("All done. Shutting down")
     else:
-        events = makeCalender(browser)
-        googlify(events)
-
-
-        input("just waiting around ")
-    browser.quit()
-    display.stop()
+        print("I need an actual number for week")
