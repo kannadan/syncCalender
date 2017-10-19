@@ -120,6 +120,8 @@ def makeCalender(driver, week):
                                     'timeZone': 'Europe/Helsinki'}
                 dict["end"] = {"dateTime" : end.strftime("%Y-%m-%dT%H:%M:%S"),
                                     'timeZone': 'Europe/Helsinki'}
+                dict["reminders"] = {"useDefault": False,
+                                    "overrides" : []}
                 allEvents.append(dict)
                 print("event found on " + start.strftime("%d.%m.%Y"))
                 print("kello: " + labelL + " - Luokka: " + labelR)

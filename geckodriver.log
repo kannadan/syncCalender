@@ -101,3 +101,54 @@
 1508357327327	Marionette	INFO	New connections will no longer be accepted
 [Child 16172] WARNING: pipe error (18): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
 [Child 16172] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1508397612132	geckodriver	INFO	geckodriver 0.19.0
+1508397612325	geckodriver	INFO	Listening on 127.0.0.1:51311
+1508397613666	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-profile" "/tmp/rust_mozprofile.1yAU5WP8IBxD"
+1508397614483	addons.xpi	WARN	Error parsing extensions state: [Exception... "Component returned failure code: 0x80520012 (NS_ERROR_FILE_NOT_FOUND) [amIAddonManagerStartup.readStartupData]"  nsresult: "0x80520012 (NS_ERROR_FILE_NOT_FOUND)"  location: "JS frame :: resource://gre/modules/addons/XPIProvider.jsm :: loadExtensionState :: line 1554"  data: no] Stack trace: loadExtensionState()@resource://gre/modules/addons/XPIProvider.jsm:1554 < getInstallState()@resource://gre/modules/addons/XPIProvider.jsm:1589 < checkForChanges()@resource://gre/modules/addons/XPIProvider.jsm:3109 < startup()@resource://gre/modules/addons/XPIProvider.jsm:2188 < callProvider()@resource://gre/modules/AddonManager.jsm:269 < _startProvider()@resource://gre/modules/AddonManager.jsm:739 < startup()@resource://gre/modules/AddonManager.jsm:906 < startup()@resource://gre/modules/AddonManager.jsm:3090 < observe()@jar:file:///usr/lib/firefox/omni.ja!/components/addonManager.js:65
+1508397615236	Marionette	INFO	Enabled via --marionette
+1508397618264	Marionette	INFO	Listening on port 46172
+1508397618303	Marionette	WARN	TLS certificate errors will be ignored for this session
+1508397618346	Marionette	DEBUG	Register listener.js for window 2147483649
+1508397618463	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1508397619392	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1508397619393	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1508397619723	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=E2CDD8560FA471B8870F332AC8CE3EA5?execution=e1s1"
+1508397619726	Marionette	DEBUG	Received DOM event "pageshow" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=E2CDD8560FA471B8870F332AC8CE3EA5?execution=e1s1"
+1508397630250	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1508397640311	Marionette	INFO	New connections will no longer be accepted
+[Child 3702] WARNING: pipe error (19): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+[Child 3702] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1508397673326	geckodriver	INFO	geckodriver 0.19.0
+1508397673330	geckodriver	INFO	Listening on 127.0.0.1:39830
+1508397674445	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-profile" "/tmp/rust_mozprofile.kRbCOGMyWVNO"
+1508397674723	addons.xpi	WARN	Error parsing extensions state: [Exception... "Component returned failure code: 0x80520012 (NS_ERROR_FILE_NOT_FOUND) [amIAddonManagerStartup.readStartupData]"  nsresult: "0x80520012 (NS_ERROR_FILE_NOT_FOUND)"  location: "JS frame :: resource://gre/modules/addons/XPIProvider.jsm :: loadExtensionState :: line 1554"  data: no] Stack trace: loadExtensionState()@resource://gre/modules/addons/XPIProvider.jsm:1554 < getInstallState()@resource://gre/modules/addons/XPIProvider.jsm:1589 < checkForChanges()@resource://gre/modules/addons/XPIProvider.jsm:3109 < startup()@resource://gre/modules/addons/XPIProvider.jsm:2188 < callProvider()@resource://gre/modules/AddonManager.jsm:269 < _startProvider()@resource://gre/modules/AddonManager.jsm:739 < startup()@resource://gre/modules/AddonManager.jsm:906 < startup()@resource://gre/modules/AddonManager.jsm:3090 < observe()@jar:file:///usr/lib/firefox/omni.ja!/components/addonManager.js:65
+1508397675353	Marionette	INFO	Enabled via --marionette
+1508397677560	Marionette	INFO	Listening on port 40327
+1508397677676	Marionette	WARN	TLS certificate errors will be ignored for this session
+1508397677723	Marionette	DEBUG	Register listener.js for window 2147483649
+1508397677760	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1508397678594	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1508397678594	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1508397678946	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=B0FAF24AB0D8BD43C1254A1775C1FD58?execution=e1s1"
+1508397678954	Marionette	DEBUG	Received DOM event "pageshow" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=B0FAF24AB0D8BD43C1254A1775C1FD58?execution=e1s1"
+1508397689482	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1508397699538	Marionette	INFO	New connections will no longer be accepted
+[Child 3840] WARNING: pipe error (18): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+[Child 3840] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1508397887390	geckodriver	INFO	geckodriver 0.19.0
+1508397887394	geckodriver	INFO	Listening on 127.0.0.1:49978
+1508397888506	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-profile" "/tmp/rust_mozprofile.jGWhn5BxjvXv"
+1508397888790	addons.xpi	WARN	Error parsing extensions state: [Exception... "Component returned failure code: 0x80520012 (NS_ERROR_FILE_NOT_FOUND) [amIAddonManagerStartup.readStartupData]"  nsresult: "0x80520012 (NS_ERROR_FILE_NOT_FOUND)"  location: "JS frame :: resource://gre/modules/addons/XPIProvider.jsm :: loadExtensionState :: line 1554"  data: no] Stack trace: loadExtensionState()@resource://gre/modules/addons/XPIProvider.jsm:1554 < getInstallState()@resource://gre/modules/addons/XPIProvider.jsm:1589 < checkForChanges()@resource://gre/modules/addons/XPIProvider.jsm:3109 < startup()@resource://gre/modules/addons/XPIProvider.jsm:2188 < callProvider()@resource://gre/modules/AddonManager.jsm:269 < _startProvider()@resource://gre/modules/AddonManager.jsm:739 < startup()@resource://gre/modules/AddonManager.jsm:906 < startup()@resource://gre/modules/AddonManager.jsm:3090 < observe()@jar:file:///usr/lib/firefox/omni.ja!/components/addonManager.js:65
+1508397889344	Marionette	INFO	Enabled via --marionette
+1508397891779	Marionette	INFO	Listening on port 39466
+1508397891825	Marionette	WARN	TLS certificate errors will be ignored for this session
+1508397891884	Marionette	DEBUG	Register listener.js for window 2147483649
+1508397891918	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1508397892768	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1508397892769	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1508397893127	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=D43DAE3077E535E30380314414DD8D03?execution=e1s1"
+1508397893146	Marionette	DEBUG	Received DOM event "pageshow" for "https://login.oulu.fi/idp/profile/SAML2/Redirect/SSO;jsessionid=D43DAE3077E535E30380314414DD8D03?execution=e1s1"
+1508397903720	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1508397913767	Marionette	INFO	New connections will no longer be accepted
+[Child 4043] WARNING: pipe error (18): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+[Child 4043] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-l1g98U/firefox-56.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
